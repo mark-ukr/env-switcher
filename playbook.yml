@@ -1,0 +1,158 @@
+---
+- hosts: localhost
+  remote_user: root
+  vars:
+    targetEnvironment: '{{ env }}'
+    home: '{{ ansible_env.HOME }}'
+    gitRepos: '{{ home }}/git-repos'
+    nginxSites: '/etc/nginx/sites-enabled'
+    nginxWWW_0: '/usr/share/nginx/www'
+    nginxWWW_1: '/usr/local/share/nginx/www'
+    hostsFile: /etc/hosts
+    projectDomains: [ 'events.bizzabo.com', 'accounts.bizzabo.com', 'organizer.bizzabo.com' ]
+    environments: [ 'dev', 'gang', 'demo', 'int' ]
+    directories:
+      - '{{ nginxWWW_0 }}/dev'
+      - '{{ nginxWWW_0 }}/gang'
+      - '{{ nginxWWW_0 }}/demo'
+      - '{{ nginxWWW_0 }}/qa'
+      - '{{ nginxWWW_1 }}/dev'
+      - '{{ nginxWWW_1 }}/gang'
+      - '{{ nginxWWW_1 }}/demo'
+      - '{{ nginxWWW_1 }}/qa'
+    symlinks:
+      #web-dashboard
+      - env: dev
+        from: '{{ gitRepos }}/web-dashboard/nginx/dev-accounts.bizzabo.com'
+        to: '{{ nginxSites }}/dev-accounts.bizzabo.com'
+      - env: gang
+        from: '{{ gitRepos }}/web-dashboard/nginx/gang-accounts.bizzabo.com'
+        to: '{{ nginxSites }}/gang-accounts.bizzabo.com'
+      - env: int
+        from: '{{ gitRepos }}/web-dashboard/nginx/int-accounts.bizzabo.com'
+        to: '{{ nginxSites }}/int-accounts.bizzabo.com'
+      - env: demo
+        from: '{{ gitRepos }}/web-dashboard/nginx/demo-accounts.bizzabo.com'
+        to: '{{ nginxSites }}/demo-accounts.bizzabo.com'
+
+      - env: dev
+        from: '{{ gitRepos }}/web-dashboard'
+        to: '{{ nginxWWW_0 }}/dev/dashboard'
+      - env: gang
+        from: '{{ gitRepos }}/web-dashboard'
+        to: '{{ nginxWWW_0 }}/gang/dashboard'
+      - env: int
+        from: '{{ gitRepos }}/web-dashboard'
+        to: '{{ nginxWWW_1 }}/qa/dashboard'
+      - env: demo
+        from: '{{ gitRepos }}/web-dashboard'
+        to: '{{ nginxWWW_0 }}/demo/dashboard'
+
+
+      #web-attendee        
+
+      - env: dev
+        from: '{{ gitRepos }}/web-attendee/nginx/dev-events.bizzabo.com'
+        to: '{{ nginxSites }}/dev-events.bizzabo.com'
+      - env: gang
+        from: '{{ gitRepos }}/web-attendee/nginx/gang-events.bizzabo.com'
+        to: '{{ nginxSites }}/gang-events.bizzabo.com'
+      - env: int
+        from: '{{ gitRepos }}/web-attendee/nginx/int-events.bizzabo.com'
+        to: '{{ nginxSites }}/int-events.bizzabo.com'
+      - env: demo
+        from: '{{ gitRepos }}/web-attendee/nginx/demo-events.bizzabo.com'
+        to: '{{ nginxSites }}/demo-events.bizzabo.com'
+
+      - env: dev
+        from: '{{ gitRepos }}/web-attendee'
+        to: '{{ nginxWWW_0 }}/dev/webattendee'
+      - env: gang
+        from: '{{ gitRepos }}/web-attendee'
+        to: '{{ nginxWWW_0 }}/gang/webattendee'
+      - env: int
+        from: '{{ gitRepos }}/web-attendee'
+        to: '{{ nginxWWW_1 }}/qa/webattendee'
+      - env: demo
+        from: '{{ gitRepos }}/web-attendee'
+        to: '{{ nginxWWW_0 }}/demo/webattendee'
+
+
+      # web-widgets:
+
+      - env: dev
+        from: '{{ gitRepos }}/web-widgets/src'
+        to: '{{ nginxWWW_1 }}/dev/widgets'
+      - env: gang
+        from: '{{ gitRepos }}/web-widgets/src'
+        to: '{{ nginxWWW_1 }}/gang/widgets'
+      - env: int
+        from: '{{ gitRepos }}/web-widgets/src'
+        to: '{{ nginxWWW_1 }}/qa/widgets'
+      - env: demo
+        from: '{{ gitRepos }}/web-widgets/src'
+        to: '{{ nginxWWW_1 }}/demo/widgets'
+
+      # web-organizer:
+
+      - env: dev
+        from: '{{ gitRepos }}/web-organizer/src/nginx/dev-organizer.bizzabo.com'
+        to: '{{ nginxSites }}/dev-organizer.bizzabo.com'
+      - env: gang
+        from: '{{ gitRepos }}/web-organizer/src/nginx/gang-organizer.bizzabo.com'
+        to: '{{ nginxSites }}/gang-organizer.bizzabo.com'
+      - env: int
+        from: '{{ gitRepos }}/web-organizer/src/nginx/int-organizer.bizzabo.com'
+        to: '{{ nginxSites }}/int-organizer.bizzabo.com'
+      - env: demo
+        from: '{{ gitRepos }}/web-organizer/src/nginx/demo-organizer.bizzabo.com'
+        to: '{{ nginxSites }}/demo-organizer.bizzabo.com'
+
+
+  tasks:
+
+    - name: Touch hosts file
+      become: true
+      file:
+        path: '{{ hostsFile }}'
+        state: touch
+
+    - name: Remove all Bizzabo-related records from {{ hostsFile }}
+      become: true
+      lineinfile:
+        path: '{{ hostsFile }}'
+        state: absent
+        line: '127.0.0.1 {{item[0]}}-{{item[1]}}'
+      with_nested:
+        - '{{ environments }}'
+        - '{{ projectDomains }}'
+
+    - name: Add "{{ targetEnvironment }}" environment to {{ hostsFile }}
+      become: true
+      lineinfile:
+        path: '{{ hostsFile }}'
+        state: present
+        line: '127.0.0.1 {{ targetEnvironment }}-{{ item }}'
+      with_items: '{{ projectDomains }}'
+    
+    - name: Create directories
+      become: true
+      file:
+        path: '{{ item }}'
+        state: directory
+      with_items: '{{ directories }}'
+
+    - name: Setup symbolic links
+      become: true
+      file:
+        path: '{{ item.to }}'
+        src: '{{ item.from }}'
+        state: "{{ (item.env == targetEnvironment) | ternary('link', 'absent') }}"
+      with_items: '{{ symlinks }}'
+    
+    - name: Restart NGINX
+      become: true
+      service:
+        name: nginx
+        state: restarted
+
