@@ -6,20 +6,20 @@
     home: '{{ ansible_env.HOME }}'
     gitRepos: '{{ home }}/git-repos'
     nginxSites: '/etc/nginx/sites-enabled'
-    nginxWWW_0: '/usr/share/nginx/www'
-    nginxWWW_1: '/usr/local/share/nginx/www'
+    nginxWWW: '/usr/share/nginx/www'
+    nginxWWWLocal: '/usr/local/share/nginx/www'
     hostsFile: /etc/hosts
     projectDomains: [ 'events.bizzabo.com', 'accounts.bizzabo.com', 'organizer.bizzabo.com' ]
     environments: [ 'dev', 'gang', 'demo', 'int' ]
     directories:
-      - '{{ nginxWWW_0 }}/dev'
-      - '{{ nginxWWW_0 }}/gang'
-      - '{{ nginxWWW_0 }}/demo'
-      - '{{ nginxWWW_0 }}/qa'
-      - '{{ nginxWWW_1 }}/dev'
-      - '{{ nginxWWW_1 }}/gang'
-      - '{{ nginxWWW_1 }}/demo'
-      - '{{ nginxWWW_1 }}/qa'
+      - '{{ nginxWWW }}/dev'
+      - '{{ nginxWWW }}/gang'
+      - '{{ nginxWWW }}/demo'
+      - '{{ nginxWWW }}/qa'
+      - '{{ nginxWWWLocal }}/dev'
+      - '{{ nginxWWWLocal }}/gang'
+      - '{{ nginxWWWLocal }}/demo'
+      - '{{ nginxWWWLocal }}/qa'
     symlinks:
       #web-dashboard
       - env: dev
@@ -37,16 +37,16 @@
 
       - env: dev
         from: '{{ gitRepos }}/web-dashboard'
-        to: '{{ nginxWWW_0 }}/dev/dashboard'
+        to: '{{ nginxWWWLocal }}/dev/dashboard'
       - env: gang
         from: '{{ gitRepos }}/web-dashboard'
-        to: '{{ nginxWWW_0 }}/gang/dashboard'
+        to: '{{ nginxWWWLocal }}/gang/dashboard'
       - env: int
         from: '{{ gitRepos }}/web-dashboard'
-        to: '{{ nginxWWW_1 }}/qa/dashboard'
+        to: '{{ nginxWWW }}/qa/dashboard'
       - env: demo
         from: '{{ gitRepos }}/web-dashboard'
-        to: '{{ nginxWWW_0 }}/demo/dashboard'
+        to: '{{ nginxWWW }}/demo/dashboard'
 
 
       #web-attendee        
@@ -66,32 +66,32 @@
 
       - env: dev
         from: '{{ gitRepos }}/web-attendee'
-        to: '{{ nginxWWW_0 }}/dev/webattendee'
+        to: '{{ nginxWWWLocal }}/dev/webattendee'
       - env: gang
         from: '{{ gitRepos }}/web-attendee'
-        to: '{{ nginxWWW_0 }}/gang/webattendee'
+        to: '{{ nginxWWWLocal }}/gang/webattendee'
       - env: int
         from: '{{ gitRepos }}/web-attendee'
-        to: '{{ nginxWWW_1 }}/qa/webattendee'
+        to: '{{ nginxWWW }}/qa/webattendee'
       - env: demo
         from: '{{ gitRepos }}/web-attendee'
-        to: '{{ nginxWWW_0 }}/demo/webattendee'
+        to: '{{ nginxWWW }}/demo/webattendee'
 
 
       # web-widgets:
 
       - env: dev
         from: '{{ gitRepos }}/web-widgets/src'
-        to: '{{ nginxWWW_1 }}/dev/widgets'
+        to: '{{ nginxWWWLocal }}/dev/widgets'
       - env: gang
         from: '{{ gitRepos }}/web-widgets/src'
-        to: '{{ nginxWWW_1 }}/gang/widgets'
+        to: '{{ nginxWWWLocal }}/gang/widgets'
       - env: int
         from: '{{ gitRepos }}/web-widgets/src'
-        to: '{{ nginxWWW_1 }}/qa/widgets'
+        to: '{{ nginxWWW }}/qa/widgets'
       - env: demo
         from: '{{ gitRepos }}/web-widgets/src'
-        to: '{{ nginxWWW_1 }}/demo/widgets'
+        to: '{{ nginxWWW }}/demo/widgets'
 
       # web-organizer:
 
