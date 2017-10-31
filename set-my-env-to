@@ -1,0 +1,4 @@
+#!/bin/bash -e
+
+cd "$(dirname "$0")"
+ansible-playbook playbook.yml --ask-become-pass -e "env=$1"
