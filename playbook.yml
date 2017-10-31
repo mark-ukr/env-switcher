@@ -109,6 +109,20 @@
         to: '{{ nginxSites }}/demo-organizer.bizzabo.com'
 
 
+      - env: dev
+        from: '{{ gitRepos }}/web-organizer/src'
+        to: '{{ nginxWWWLocal }}/dev/organizer'
+      - env: gang
+        from: '{{ gitRepos }}/web-organizer/src'
+        to: '{{ nginxWWWLocal }}/gang/organizer'
+      - env: int
+        from: '{{ gitRepos }}/web-organizer/src'
+        to: '{{ nginxWWW }}/qa/organizer'
+      - env: demo
+        from: '{{ gitRepos }}/web-organizer/src'
+        to: '{{ nginxWWW }}/demo/organizer'
+
+
   tasks:
 
     - name: Touch hosts file
