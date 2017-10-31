@@ -81,16 +81,16 @@
       # web-widgets:
 
       - env: dev
-        from: '{{ gitRepos }}/web-widgets/src'
+        from: '{{ gitRepos }}/web-widgets/dist'
         to: '{{ nginxWWWLocal }}/dev/widgets'
       - env: gang
-        from: '{{ gitRepos }}/web-widgets/src'
+        from: '{{ gitRepos }}/web-widgets/dist'
         to: '{{ nginxWWWLocal }}/gang/widgets'
       - env: int
-        from: '{{ gitRepos }}/web-widgets/src'
+        from: '{{ gitRepos }}/web-widgets/dist'
         to: '{{ nginxWWW }}/qa/widgets'
       - env: demo
-        from: '{{ gitRepos }}/web-widgets/src'
+        from: '{{ gitRepos }}/web-widgets/dist'
         to: '{{ nginxWWW }}/demo/widgets'
 
       # web-organizer:
