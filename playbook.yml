@@ -156,12 +156,22 @@
         state: directory
       with_items: '{{ directories }}'
 
+    # - name: Setup symbolic links
+    #   become: true
+    #   file:
+    #     path: '{{ item.to }}'
+    #     src: '{{ item.from }}'
+    #     state: "{{ (item.env == targetEnvironment) | ternary('link', 'absent') }}"
+    #   with_items: '{{ symlinks }}'
+
     - name: Setup symbolic links
       become: true
-      file:
-        path: '{{ item.to }}'
-        src: '{{ item.from }}'
-        state: "{{ (item.env == targetEnvironment) | ternary('link', 'absent') }}"
+      include_role:
+        name: links
+      vars:
+        source: '{{ item.from }}'
+        destination: '{{ item.to }}'
+        state: '{{ (item.env == targetEnvironment) | ternary("link", "absent") }}'
       with_items: '{{ symlinks }}'
     
     - name: Restart NGINX
