@@ -156,14 +156,6 @@
         state: directory
       with_items: '{{ directories }}'
 
-    # - name: Setup symbolic links
-    #   become: true
-    #   file:
-    #     path: '{{ item.to }}'
-    #     src: '{{ item.from }}'
-    #     state: "{{ (item.env == targetEnvironment) | ternary('link', 'absent') }}"
-    #   with_items: '{{ symlinks }}'
-
     - name: Setup symbolic links
       become: true
       include_role:
