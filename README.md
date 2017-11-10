@@ -29,8 +29,8 @@ sudo apt-get install ansible
 ./set-my-env-to gang
 
 #int:
-./set-my-env-to gang
+./set-my-env-to int
 
 #demo:
-./set-my-env-to gang
+./set-my-env-to demo
 ```
