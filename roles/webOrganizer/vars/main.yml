@@ -1,0 +1,33 @@
+envConfigs:
+  dev:
+    hosts:
+      - dev-organizer.bizzabo.com
+    symlinks:
+      - from: '{{ projectRoots.webOrganizer }}/src/nginx/dev-organizer.bizzabo.com'
+        to: '{{ nginxSites }}/dev-organizer.bizzabo.com'
+      - from: '{{ projectRoots.webOrganizer }}'
+        to: '{{ nginxWWWLocal }}/dev/organizer'
+  gang:
+    hosts:
+      - gang-organizer.bizzabo.com
+    symlinks:
+      - from: '{{ projectRoots.webOrganizer }}/src/nginx/gang-organizer.bizzabo.com'
+        to: '{{ nginxSites }}/gang-organizer.bizzabo.com'
+      - from: '{{ projectRoots.webOrganizer }}'
+        to: '{{ nginxWWWLocal }}/gang/organizer'
+  demo:
+    hosts:
+      - demo-organizer.bizzabo.com
+    symlinks:
+      - from: '{{ projectRoots.webOrganizer }}/src/nginx/demo-organizer.bizzabo.com'
+        to: '{{ nginxSites }}/demo-organizer.bizzabo.com'
+      - from: '{{ projectRoots.webOrganizer }}'
+        to: '{{ nginxWWW }}/demo/organizer'
+  int:
+    hosts:
+      - int-organizer.bizzabo.com
+    symlinks:
+      - from: '{{ projectRoots.webOrganizer }}/src/nginx/int-organizer.bizzabo.com'
+        to: '{{ nginxSites }}/int-organizer.bizzabo.com'
+      - from: '{{ projectRoots.webOrganizer }}'
+        to: '{{ nginxWWW }}/qa/organizer'

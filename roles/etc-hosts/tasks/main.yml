@@ -1,0 +1,8 @@
+- name: '{{ (targetEnvironment == currentEnv) | ternary("Add", "Remove") }} Hosts Records'
+  lineinfile:
+    path: '{{ hostsFile }}'
+    state: '{{ (targetEnvironment == currentEnv) | ternary("present", "absent") }}'
+    line: '127.0.0.1 {{ hostItem }}'
+  with_items: '{{ hosts }}'
+  loop_control:
+    loop_var: hostItem

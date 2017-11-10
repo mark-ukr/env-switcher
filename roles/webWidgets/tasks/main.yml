@@ -1,0 +1,7 @@
+- name: Setup Symbolic Links
+  include_role:
+    name: symlinks
+  vars:
+    symlinks: '{{ envConfigs[item].symlinks }}'
+    currentEnv: '{{ item }}'
+  with_items: '{{ environments }}'
