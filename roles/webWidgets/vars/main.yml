@@ -1,0 +1,17 @@
+envConfigs:
+  dev:
+    symlinks:
+      - from: '{{ projectRoots.webWidgets }}/dist'
+        to: '{{ nginxWWWLocal }}/dev/widgets'
+  gang:
+    symlinks:
+      - from: '{{ projectRoots.webWidgets }}/dist'
+        to: '{{ nginxWWWLocal }}/gang/widgets'
+  demo:
+    symlinks:
+      - from: '{{ projectRoots.webWidgets }}/dist'
+        to: '{{ nginxWWW }}/demo/widgets'
+  int:
+    symlinks:
+      - from: '{{ projectRoots.webWidgets }}/dist'
+        to: '{{ nginxWWW }}/qa/widgets'

@@ -9,9 +9,17 @@
     nginxWWW: '/usr/share/nginx/www'
     nginxWWWLocal: '/usr/local/share/nginx/www'
     hostsFile: /etc/hosts
-    projectDomains: [ 'events.bizzabo.com', 'accounts.bizzabo.com', 'organizer.bizzabo.com' ]
-    environments: [ 'dev', 'gang', 'demo', 'int' ]
-    directories:
+    environments:
+      - dev
+      - gang
+      - demo
+      - int
+    projectRoots:
+      webDashboard: '{{ gitRepos }}/web-dashboard'
+      webAttendee: '{{ gitRepos }}/web-attendee'
+      webWidgets: '{{ gitRepos }}/web-widgets'
+      webOrganizer: '{{ gitRepos }}/web-organizer'
+    wwwDirectories:
       - '{{ nginxWWW }}/dev'
       - '{{ nginxWWW }}/gang'
       - '{{ nginxWWW }}/demo'
@@ -20,155 +28,71 @@
       - '{{ nginxWWWLocal }}/gang'
       - '{{ nginxWWWLocal }}/demo'
       - '{{ nginxWWWLocal }}/qa'
-    symlinks:
-      #web-dashboard
-      - env: dev
-        from: '{{ gitRepos }}/web-dashboard/nginx/dev-accounts.bizzabo.com'
-        to: '{{ nginxSites }}/dev-accounts.bizzabo.com'
-      - env: gang
-        from: '{{ gitRepos }}/web-dashboard/nginx/gang-accounts.bizzabo.com'
-        to: '{{ nginxSites }}/gang-accounts.bizzabo.com'
-      - env: int
-        from: '{{ gitRepos }}/web-dashboard/nginx/int-accounts.bizzabo.com'
-        to: '{{ nginxSites }}/int-accounts.bizzabo.com'
-      - env: demo
-        from: '{{ gitRepos }}/web-dashboard/nginx/demo-accounts.bizzabo.com'
-        to: '{{ nginxSites }}/demo-accounts.bizzabo.com'
-
-      - env: dev
-        from: '{{ gitRepos }}/web-dashboard'
-        to: '{{ nginxWWWLocal }}/dev/dashboard'
-      - env: gang
-        from: '{{ gitRepos }}/web-dashboard'
-        to: '{{ nginxWWWLocal }}/gang/dashboard'
-      - env: int
-        from: '{{ gitRepos }}/web-dashboard'
-        to: '{{ nginxWWW }}/qa/dashboard'
-      - env: demo
-        from: '{{ gitRepos }}/web-dashboard'
-        to: '{{ nginxWWW }}/demo/dashboard'
-
-
-      #web-attendee        
-
-      - env: dev
-        from: '{{ gitRepos }}/web-attendee/nginx/dev-events.bizzabo.com'
-        to: '{{ nginxSites }}/dev-events.bizzabo.com'
-      - env: gang
-        from: '{{ gitRepos }}/web-attendee/nginx/gang-events.bizzabo.com'
-        to: '{{ nginxSites }}/gang-events.bizzabo.com'
-      - env: int
-        from: '{{ gitRepos }}/web-attendee/nginx/int-events.bizzabo.com'
-        to: '{{ nginxSites }}/int-events.bizzabo.com'
-      - env: demo
-        from: '{{ gitRepos }}/web-attendee/nginx/demo-events.bizzabo.com'
-        to: '{{ nginxSites }}/demo-events.bizzabo.com'
-
-      - env: dev
-        from: '{{ gitRepos }}/web-attendee'
-        to: '{{ nginxWWWLocal }}/dev/webattendee'
-      - env: gang
-        from: '{{ gitRepos }}/web-attendee'
-        to: '{{ nginxWWWLocal }}/gang/webattendee'
-      - env: int
-        from: '{{ gitRepos }}/web-attendee'
-        to: '{{ nginxWWW }}/qa/webattendee'
-      - env: demo
-        from: '{{ gitRepos }}/web-attendee'
-        to: '{{ nginxWWW }}/demo/webattendee'
-
-
-      # web-widgets:
-
-      - env: dev
-        from: '{{ gitRepos }}/web-widgets/src'
-        to: '{{ nginxWWWLocal }}/dev/widgets'
-      - env: gang
-        from: '{{ gitRepos }}/web-widgets/src'
-        to: '{{ nginxWWWLocal }}/gang/widgets'
-      - env: int
-        from: '{{ gitRepos }}/web-widgets/src'
-        to: '{{ nginxWWW }}/qa/widgets'
-      - env: demo
-        from: '{{ gitRepos }}/web-widgets/src'
-        to: '{{ nginxWWW }}/demo/widgets'
-
-      # web-organizer:
-
-      - env: dev
-        from: '{{ gitRepos }}/web-organizer/src/nginx/dev-organizer.bizzabo.com'
-        to: '{{ nginxSites }}/dev-organizer.bizzabo.com'
-      - env: gang
-        from: '{{ gitRepos }}/web-organizer/src/nginx/gang-organizer.bizzabo.com'
-        to: '{{ nginxSites }}/gang-organizer.bizzabo.com'
-      - env: int
-        from: '{{ gitRepos }}/web-organizer/src/nginx/int-organizer.bizzabo.com'
-        to: '{{ nginxSites }}/int-organizer.bizzabo.com'
-      - env: demo
-        from: '{{ gitRepos }}/web-organizer/src/nginx/demo-organizer.bizzabo.com'
-        to: '{{ nginxSites }}/demo-organizer.bizzabo.com'
-
-
-      - env: dev
-        from: '{{ gitRepos }}/web-organizer/src'
-        to: '{{ nginxWWWLocal }}/dev/organizer'
-      - env: gang
-        from: '{{ gitRepos }}/web-organizer/src'
-        to: '{{ nginxWWWLocal }}/gang/organizer'
-      - env: int
-        from: '{{ gitRepos }}/web-organizer/src'
-        to: '{{ nginxWWW }}/qa/organizer'
-      - env: demo
-        from: '{{ gitRepos }}/web-organizer/src'
-        to: '{{ nginxWWW }}/demo/organizer'
-
 
   tasks:
-
-    - name: Touch hosts file
-      become: true
-      file:
-        path: '{{ hostsFile }}'
-        state: touch
-
-    - name: Remove all Bizzabo-related records from {{ hostsFile }}
-      become: true
-      lineinfile:
-        path: '{{ hostsFile }}'
-        state: absent
-        line: '127.0.0.1 {{item[0]}}-{{item[1]}}'
-      with_nested:
-        - '{{ environments }}'
-        - '{{ projectDomains }}'
-
-    - name: Add "{{ targetEnvironment }}" environment to {{ hostsFile }}
-      become: true
-      lineinfile:
-        path: '{{ hostsFile }}'
-        state: present
-        line: '127.0.0.1 {{ targetEnvironment }}-{{ item }}'
-      with_items: '{{ projectDomains }}'
-    
-    - name: Create directories
+    - name: Create WWW Directories
       become: true
       file:
         path: '{{ item }}'
         state: directory
-      with_items: '{{ directories }}'
+      with_items: '{{ wwwDirectories }}'
 
-    - name: Setup symbolic links
+    # --------
+
+    - name: Check for Web-Attendee
+      stat:
+        path: '{{ projectRoots.webAttendee }}'
+      register: webAttendeeStat
+
+    - name: Web-Attendee
       become: true
       include_role:
-        name: links
-      vars:
-        source: '{{ item.from }}'
-        destination: '{{ item.to }}'
-        state: '{{ (item.env == targetEnvironment) | ternary("link", "absent") }}'
-      with_items: '{{ symlinks }}'
-    
+        name: webAttendee
+      when: webAttendeeStat.stat.isdir is defined and webAttendeeStat.stat.isdir 
+
+    # --------
+
+    - name: Check for Web-Dashboard
+      stat:
+        path: '{{ projectRoots.webDashboard }}'
+      register: webDashboardStat
+
+    - name: Web-Dashboard
+      become: true
+      include_role:
+        name: webDashboard
+      when: webDashboardStat.stat.isdir is defined and webDashboardStat.stat.isdir 
+
+    # --------
+
+    - name: Check for Web-Widgets
+      stat:
+        path: '{{ projectRoots.webWidgets }}'
+      register: webWidgetsStat
+
+    - name: Web-Widgets
+      become: true
+      include_role:
+        name: webWidgets
+      when: webWidgetsStat.stat.isdir is defined and webWidgetsStat.stat.isdir 
+
+    # --------
+
+    - name: Check for Web-Organizer
+      stat:
+        path: '{{ projectRoots.webOrganizer }}'
+      register: webOrganizerStat
+
+    - name: Web-Organizer
+      become: true
+      include_role:
+        name: webOrganizer
+      when: webOrganizerStat.stat.isdir is defined and webOrganizerStat.stat.isdir 
+
+    # --------
+
     - name: Restart NGINX
       become: true
       service:
         name: nginx
         state: restarted
-

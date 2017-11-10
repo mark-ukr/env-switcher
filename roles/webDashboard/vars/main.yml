@@ -1,0 +1,33 @@
+envConfigs:
+  dev:
+    hosts:
+      - dev-accounts.bizzabo.com
+    symlinks:
+      - from: '{{ projectRoots.webDashboard}}/nginx/dev-accounts.bizzabo.com'
+        to: '{{ nginxSites }}/dev-accounts.bizzabo.com'
+      - from: '{{ projectRoots.webDashboard}}'
+        to: '{{ nginxWWWLocal }}/dev/dashboard'
+  gang:
+    hosts:
+      - gang-accounts.bizzabo.com
+    symlinks:
+      - from: '{{ projectRoots.webDashboard}}/nginx/gang-accounts.bizzabo.com'
+        to: '{{ nginxSites }}/gang-accounts.bizzabo.com'
+      - from: '{{ projectRoots.webDashboard}}'
+        to: '{{ nginxWWWLocal }}/gang/dashboard'
+  demo:
+    hosts:
+      - demo-accounts.bizzabo.com
+    symlinks:
+      - from: '{{ projectRoots.webDashboard}}/nginx/demo-accounts.bizzabo.com'
+        to: '{{ nginxSites }}/demo-accounts.bizzabo.com'
+      - from: '{{ projectRoots.webDashboard}}'
+        to: '{{ nginxWWW }}/demo/dashboard'
+  int:
+    hosts:
+      - int-accounts.bizzabo.com
+    symlinks:
+      - from: '{{ projectRoots.webDashboard}}/nginx/int-accounts.bizzabo.com'
+        to: '{{ nginxSites }}/int-accounts.bizzabo.com'
+      - from: '{{ projectRoots.webDashboard}}'
+        to: '{{ nginxWWW }}/qa/dashboard'

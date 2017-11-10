@@ -1,0 +1,33 @@
+envConfigs:
+  dev:
+    hosts:
+      - dev-events.bizzabo.com
+    symlinks:
+      - from: '{{ projectRoots.webAttendee }}/nginx/dev-events.bizzabo.com'
+        to: '{{ nginxSites }}/dev-events.bizzabo.com'
+      - from: '{{ gitRepos }}/web-attendee'
+        to: '{{ nginxWWWLocal }}/dev/webattendee'
+  gang:
+    hosts:
+      - gang-events.bizzabo.com
+    symlinks:
+      - from: '{{ projectRoots.webAttendee }}/nginx/gang-events.bizzabo.com'
+        to: '{{ nginxSites }}/gang-events.bizzabo.com'
+      - from: '{{ gitRepos }}/web-attendee'
+        to: '{{ nginxWWWLocal }}/gang/webattendee'
+  demo:
+    hosts:
+      - demo-events.bizzabo.com
+    symlinks:
+      - from: '{{ projectRoots.webAttendee }}/nginx/demo-events.bizzabo.com'
+        to: '{{ nginxSites }}/demo-events.bizzabo.com'
+      - from: '{{ gitRepos }}/web-attendee'
+        to: '{{ nginxWWW }}/demo/webattendee'
+  int:
+    hosts:
+      - int-events.bizzabo.com
+    symlinks:
+      - from: '{{ projectRoots.webAttendee }}/nginx/int-events.bizzabo.com'
+        to: '{{ nginxSites }}/int-events.bizzabo.com'
+      - from: '{{ gitRepos }}/web-attendee'
+        to: '{{ nginxWWW }}/qa/webattendee'
