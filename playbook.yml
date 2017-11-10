@@ -89,3 +89,10 @@
         name: webOrganizer
       when: webOrganizerStat.stat.isdir is defined and webOrganizerStat.stat.isdir 
 
+    # --------
+
+    - name: Restart NGINX
+      become: true
+      service:
+        name: nginx
+        state: restarted
