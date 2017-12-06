@@ -31,3 +31,11 @@ envConfigs:
         to: '{{ nginxSites }}/int-accounts.bizzabo.com'
       - from: '{{ projectRoots.webDashboard}}'
         to: '{{ nginxWWW }}/qa/dashboard'
+  prod:
+    hosts:
+      - accounts.bizzabo.com
+    symlinks:
+      - from: '{{ projectRoots.webDashboard}}/nginx/accounts.bizzabo.com'
+        to: '{{ nginxSites }}/accounts.bizzabo.com'
+      - from: '{{ projectRoots.webDashboard}}'
+        to: '{{ nginxWWW }}/prod/dashboard'

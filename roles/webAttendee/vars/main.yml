@@ -31,3 +31,11 @@ envConfigs:
         to: '{{ nginxSites }}/int-events.bizzabo.com'
       - from: '{{ gitRepos }}/web-attendee'
         to: '{{ nginxWWW }}/qa/webattendee'
+  prod:
+    hosts:
+      - events.bizzabo.com
+    symlinks:
+      - from: '{{ projectRoots.webAttendee }}/nginx/events.bizzabo.com'
+        to: '{{ nginxSites }}/events.bizzabo.com'
+      - from: '{{ gitRepos }}/web-attendee'
+        to: '{{ nginxWWW }}/prod/webattendee'

@@ -31,3 +31,11 @@ envConfigs:
         to: '{{ nginxSites }}/int-organizer.bizzabo.com'
       - from: '{{ projectRoots.webOrganizer }}'
         to: '{{ nginxWWW }}/qa/organizer'
+  prod:
+    hosts:
+      - organizer.bizzabo.com
+    symlinks:
+      - from: '{{ projectRoots.webOrganizer }}/src/nginx/organizer.bizzabo.com'
+        to: '{{ nginxSites }}/organizer.bizzabo.com'
+      - from: '{{ projectRoots.webOrganizer }}'
+        to: '{{ nginxWWW }}/prod/organizer'

@@ -15,3 +15,7 @@ envConfigs:
     symlinks:
       - from: '{{ projectRoots.webWidgets }}/dist'
         to: '{{ nginxWWW }}/qa/widgets'
+  prod:
+    symlinks:
+      - from: '{{ projectRoots.webWidgets }}/dist'
+        to: '{{ nginxWWW }}/prod/widgets'

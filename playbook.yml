@@ -14,6 +14,7 @@
       - gang
       - demo
       - int
+      - prod
     projectRoots:
       webDashboard: '{{ gitRepos }}/web-dashboard'
       webAttendee: '{{ gitRepos }}/web-attendee'
@@ -24,10 +25,12 @@
       - '{{ nginxWWW }}/gang'
       - '{{ nginxWWW }}/demo'
       - '{{ nginxWWW }}/qa'
+      - '{{ nginxWWW }}/prod'
       - '{{ nginxWWWLocal }}/dev'
       - '{{ nginxWWWLocal }}/gang'
       - '{{ nginxWWWLocal }}/demo'
       - '{{ nginxWWWLocal }}/qa'
+      - '{{ nginxWWWLocal }}/prod'
 
   tasks:
     - name: Create WWW Directories
