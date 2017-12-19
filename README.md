@@ -33,4 +33,8 @@ sudo apt-get install ansible
 
 #demo:
 ./set-my-env-to demo
+
+#prod:
+./set-my-env-to prod
+
 ```
