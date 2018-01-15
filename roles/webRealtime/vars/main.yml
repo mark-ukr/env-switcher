@@ -1,0 +1,41 @@
+envConfigs:
+  dev:
+    hosts:
+      - dev-realtime.bizzabo.com
+    symlinks:
+      - from: '{{ projectRoots.webRealtime }}/nginx/dev-realtime.bizzabo.com'
+        to: '{{ nginxSites }}/dev-realtime.bizzabo.com'
+      - from: '{{ gitRepos }}/web-realtime'
+        to: '{{ nginxWWWLocal }}/dev/webrealtime'
+  gang:
+    hosts:
+      - gang-realtime.bizzabo.com
+    symlinks:
+      - from: '{{ projectRoots.webRealtime }}/nginx/gang-realtime.bizzabo.com'
+        to: '{{ nginxSites }}/gang-realtime.bizzabo.com'
+      - from: '{{ gitRepos }}/web-realtime'
+        to: '{{ nginxWWWLocal }}/gang/webrealtime'
+  demo:
+    hosts:
+      - demo-realtime.bizzabo.com
+    symlinks:
+      - from: '{{ projectRoots.webRealtime }}/nginx/demo-realtime.bizzabo.com'
+        to: '{{ nginxSites }}/demo-realtime.bizzabo.com'
+      - from: '{{ gitRepos }}/web-realtime'
+        to: '{{ nginxWWW }}/demo/webrealtime'
+  int:
+    hosts:
+      - int-realtime.bizzabo.com
+    symlinks:
+      - from: '{{ projectRoots.webRealtime }}/nginx/int-realtime.bizzabo.com'
+        to: '{{ nginxSites }}/int-realtime.bizzabo.com'
+      - from: '{{ gitRepos }}/web-realtime'
+        to: '{{ nginxWWW }}/qa/webrealtime'
+  prod:
+    hosts:
+      - realtime.bizzabo.com
+    symlinks:
+      - from: '{{ projectRoots.webRealtime }}/nginx/realtime.bizzabo.com'
+        to: '{{ nginxSites }}/realtime.bizzabo.com'
+      - from: '{{ gitRepos }}/web-realtime'
+        to: '{{ nginxWWW }}/prod/webrealtime'

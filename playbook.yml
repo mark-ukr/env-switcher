@@ -20,6 +20,7 @@
       webAttendee: '{{ gitRepos }}/web-attendee'
       webWidgets: '{{ gitRepos }}/web-widgets'
       webOrganizer: '{{ gitRepos }}/web-organizer'
+      webRealtime: '{{ gitRepos }}/web-realtime'
     wwwDirectories:
       - '{{ nginxWWW }}/dev'
       - '{{ nginxWWW }}/gang'
@@ -39,6 +40,19 @@
         path: '{{ item }}'
         state: directory
       with_items: '{{ wwwDirectories }}'
+
+    # --------
+
+    - name: Check for Web-Realtime
+      stat:
+        path: '{{ projectRoots.webRealtime }}'
+      register: webRealtimeStat
+
+    - name: Web-Realtime
+      become: true
+      include_role:
+        name: webRealtime
+      when: webRealtimeStat.stat.isdir is defined and webRealtimeStat.stat.isdir 
 
     # --------
 
