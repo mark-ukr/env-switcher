@@ -1,4 +1,21 @@
 envConfigs:
+  hop:
+    symlinks:
+      - from: '{{ projectRoots.webWidgets }}/dist'
+        to: '{{ nginxWWWLocal }}/hop/widgets'
+  fib:
+    symlinks:
+      - from: '{{ projectRoots.webWidgets }}/dist'
+        to: '{{ nginxWWWLocal }}/fib/widgets'
+  tes:
+    symlinks:
+      - from: '{{ projectRoots.webWidgets }}/dist'
+        to: '{{ nginxWWWLocal }}/tes/widgets'
+  tur:
+    symlinks:
+      - from: '{{ projectRoots.webWidgets }}/dist'
+        to: '{{ nginxWWWLocal }}/tur/widgets'
+
   dev:
     symlinks:
       - from: '{{ projectRoots.webWidgets }}/dist'

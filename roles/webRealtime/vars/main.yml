@@ -1,4 +1,37 @@
 envConfigs:
+  hop:
+    hosts:
+      - hop-realtime.bizzabo.com
+    symlinks:
+      - from: '{{ projectRoots.webRealtime }}/nginx/hop-realtime.bizzabo.com'
+        to: '{{ nginxSites }}/hop-realtime.bizzabo.com'
+      - from: '{{ gitRepos }}/web-realtime'
+        to: '{{ nginxWWWLocal }}/hop/webrealtime'
+  fib:
+    hosts:
+      - fib-realtime.bizzabo.com
+    symlinks:
+      - from: '{{ projectRoots.webRealtime }}/nginx/fib-realtime.bizzabo.com'
+        to: '{{ nginxSites }}/fib-realtime.bizzabo.com'
+      - from: '{{ gitRepos }}/web-realtime'
+        to: '{{ nginxWWWLocal }}/fib/webrealtime'
+  tes:
+    hosts:
+      - tes-realtime.bizzabo.com
+    symlinks:
+      - from: '{{ projectRoots.webRealtime }}/nginx/tes-realtime.bizzabo.com'
+        to: '{{ nginxSites }}/tes-realtime.bizzabo.com'
+      - from: '{{ gitRepos }}/web-realtime'
+        to: '{{ nginxWWWLocal }}/tes/webrealtime'
+  tur:
+    hosts:
+      - tur-realtime.bizzabo.com
+    symlinks:
+      - from: '{{ projectRoots.webRealtime }}/nginx/tur-realtime.bizzabo.com'
+        to: '{{ nginxSites }}/tur-realtime.bizzabo.com'
+      - from: '{{ gitRepos }}/web-realtime'
+        to: '{{ nginxWWWLocal }}/tur/webrealtime'
+
   dev:
     hosts:
       - dev-realtime.bizzabo.com
