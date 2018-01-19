@@ -10,6 +10,10 @@
     nginxWWWLocal: '/usr/local/share/nginx/www'
     hostsFile: /etc/hosts
     environments:
+      - hop
+      - fib
+      - tes
+      - tur
       - dev
       - gang
       - demo
@@ -22,11 +26,19 @@
       webOrganizer: '{{ gitRepos }}/web-organizer'
       webRealtime: '{{ gitRepos }}/web-realtime'
     wwwDirectories:
+      - '{{ nginxWWW }}/hop'
+      - '{{ nginxWWW }}/fib'
+      - '{{ nginxWWW }}/tes'
+      - '{{ nginxWWW }}/tur'
       - '{{ nginxWWW }}/dev'
       - '{{ nginxWWW }}/gang'
       - '{{ nginxWWW }}/demo'
       - '{{ nginxWWW }}/qa'
       - '{{ nginxWWW }}/prod'
+      - '{{ nginxWWWLocal }}/hop'
+      - '{{ nginxWWWLocal }}/fib'
+      - '{{ nginxWWWLocal }}/tes'
+      - '{{ nginxWWWLocal }}/tur'
       - '{{ nginxWWWLocal }}/dev'
       - '{{ nginxWWWLocal }}/gang'
       - '{{ nginxWWWLocal }}/demo'

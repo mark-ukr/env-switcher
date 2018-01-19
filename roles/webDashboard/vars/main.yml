@@ -1,4 +1,37 @@
 envConfigs:
+  hop:
+    hosts:
+      - hop-accounts.bizzabo.com
+    symlinks:
+      - from: '{{ projectRoots.webDashboard}}/nginx/hop-accounts.bizzabo.com'
+        to: '{{ nginxSites }}/hop-accounts.bizzabo.com'
+      - from: '{{ projectRoots.webDashboard}}'
+        to: '{{ nginxWWWLocal }}/hop/dashboard'
+  fib:
+    hosts:
+      - fib-accounts.bizzabo.com
+    symlinks:
+      - from: '{{ projectRoots.webDashboard}}/nginx/fib-accounts.bizzabo.com'
+        to: '{{ nginxSites }}/fib-accounts.bizzabo.com'
+      - from: '{{ projectRoots.webDashboard}}'
+        to: '{{ nginxWWWLocal }}/fib/dashboard'
+  tes:
+    hosts:
+      - tes-accounts.bizzabo.com
+    symlinks:
+      - from: '{{ projectRoots.webDashboard}}/nginx/tes-accounts.bizzabo.com'
+        to: '{{ nginxSites }}/tes-accounts.bizzabo.com'
+      - from: '{{ projectRoots.webDashboard}}'
+        to: '{{ nginxWWWLocal }}/tes/dashboard'
+  tur:
+    hosts:
+      - tur-accounts.bizzabo.com
+    symlinks:
+      - from: '{{ projectRoots.webDashboard}}/nginx/tur-accounts.bizzabo.com'
+        to: '{{ nginxSites }}/tur-accounts.bizzabo.com'
+      - from: '{{ projectRoots.webDashboard}}'
+        to: '{{ nginxWWWLocal }}/tur/dashboard'
+
   dev:
     hosts:
       - dev-accounts.bizzabo.com

@@ -1,4 +1,38 @@
 envConfigs:
+
+  hop:
+    hosts:
+      - hop-events.bizzabo.com
+    symlinks:
+      - from: '{{ projectRoots.webAttendee }}/nginx/hop-events.bizzabo.com'
+        to: '{{ nginxSites }}/hop-events.bizzabo.com'
+      - from: '{{ gitRepos }}/web-attendee'
+        to: '{{ nginxWWWLocal }}/hop/webattendee'
+  fib:
+    hosts:
+      - fib-events.bizzabo.com
+    symlinks:
+      - from: '{{ projectRoots.webAttendee }}/nginx/fib-events.bizzabo.com'
+        to: '{{ nginxSites }}/fib-events.bizzabo.com'
+      - from: '{{ gitRepos }}/web-attendee'
+        to: '{{ nginxWWWLocal }}/fib/webattendee'
+  tes:
+    hosts:
+      - tes-events.bizzabo.com
+    symlinks:
+      - from: '{{ projectRoots.webAttendee }}/nginx/tes-events.bizzabo.com'
+        to: '{{ nginxSites }}/tes-events.bizzabo.com'
+      - from: '{{ gitRepos }}/web-attendee'
+        to: '{{ nginxWWWLocal }}/tes/webattendee'
+  tur:
+    hosts:
+      - tur-events.bizzabo.com
+    symlinks:
+      - from: '{{ projectRoots.webAttendee }}/nginx/tur-events.bizzabo.com'
+        to: '{{ nginxSites }}/tur-events.bizzabo.com'
+      - from: '{{ gitRepos }}/web-attendee'
+        to: '{{ nginxWWWLocal }}/tur/webattendee'
+
   dev:
     hosts:
       - dev-events.bizzabo.com

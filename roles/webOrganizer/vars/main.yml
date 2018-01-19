@@ -1,4 +1,37 @@
 envConfigs:
+  hop:
+    hosts:
+      - hop-organizer.bizzabo.com
+    symlinks:
+      - from: '{{ projectRoots.webOrganizer }}/src/nginx/hop-organizer.bizzabo.com'
+        to: '{{ nginxSites }}/hop-organizer.bizzabo.com'
+      - from: '{{ projectRoots.webOrganizer }}'
+        to: '{{ nginxWWWLocal }}/hop/organizer'
+  fib:
+    hosts:
+      - fib-organizer.bizzabo.com
+    symlinks:
+      - from: '{{ projectRoots.webOrganizer }}/src/nginx/fib-organizer.bizzabo.com'
+        to: '{{ nginxSites }}/fib-organizer.bizzabo.com'
+      - from: '{{ projectRoots.webOrganizer }}'
+        to: '{{ nginxWWWLocal }}/fib/organizer'
+  tes:
+    hosts:
+      - tes-organizer.bizzabo.com
+    symlinks:
+      - from: '{{ projectRoots.webOrganizer }}/src/nginx/tes-organizer.bizzabo.com'
+        to: '{{ nginxSites }}/tes-organizer.bizzabo.com'
+      - from: '{{ projectRoots.webOrganizer }}'
+        to: '{{ nginxWWWLocal }}/tes/organizer'
+  tur:
+    hosts:
+      - tur-organizer.bizzabo.com
+    symlinks:
+      - from: '{{ projectRoots.webOrganizer }}/src/nginx/tur-organizer.bizzabo.com'
+        to: '{{ nginxSites }}/tur-organizer.bizzabo.com'
+      - from: '{{ projectRoots.webOrganizer }}'
+        to: '{{ nginxWWWLocal }}/tur/organizer'
+
   dev:
     hosts:
       - dev-organizer.bizzabo.com
