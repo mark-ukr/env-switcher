@@ -1,4 +1,4 @@
-# fe-ansible
+# env-switcher
 
 Simple script for automatic management of `/etc/hosts` and nginx-related symbolic links.
 
