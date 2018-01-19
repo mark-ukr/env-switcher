@@ -22,6 +22,18 @@ sudo apt-get install ansible
 ## Usage:
 
 ```
+#hop:
+./set-my-env-to hop
+
+#fib:
+./set-my-env-to fib
+
+#tes:
+./set-my-env-to tes
+
+#tur:
+./set-my-env-to tur
+
 #dev:
 ./set-my-env-to dev
 
