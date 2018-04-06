@@ -29,7 +29,7 @@ envConfigs:
     symlinks:
       - from: '{{ projectRoots.webOrganizer }}/src/nginx/tur-organizer.bizzabo.com'
         to: '{{ nginxSites }}/tur-organizer.bizzabo.com'
-      - from: '{{ projectRoots.webOrganizer }}'
+      - from: '{{ projectRoots.webOrganizer }}/src'
         to: '{{ nginxWWWLocal }}/tur/organizer'
 
   dev:

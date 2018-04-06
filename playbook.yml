@@ -5,6 +5,7 @@
     targetEnvironment: '{{ env }}'
     home: '{{ ansible_env.HOME }}'
     gitRepos: '{{ home }}/git-repos'
+    nginxCerts: '/etc/nginx/certs'
     nginxSites: '/etc/nginx/sites-enabled'
     nginxWWW: '/usr/share/nginx/www'
     nginxWWWLocal: '/usr/local/share/nginx/www'
@@ -25,6 +26,16 @@
       webWidgets: '{{ gitRepos }}/web-widgets'
       webOrganizer: '{{ gitRepos }}/web-organizer'
       webRealtime: '{{ gitRepos }}/web-realtime'
+    certsDirectories:
+      - '{{ nginxCerts }}/hop'
+      - '{{ nginxCerts }}/fib'
+      - '{{ nginxCerts }}/tes'
+      - '{{ nginxCerts }}/tur'
+      - '{{ nginxCerts }}/dev'
+      - '{{ nginxCerts }}/gang'
+      - '{{ nginxCerts }}/demo'
+      - '{{ nginxCerts }}/qa'
+      - '{{ nginxCerts }}/prod'
     wwwDirectories:
       - '{{ nginxWWW }}/hop'
       - '{{ nginxWWW }}/fib'
@@ -52,6 +63,13 @@
         path: '{{ item }}'
         state: directory
       with_items: '{{ wwwDirectories }}'
+
+    - name: Create Certificates Directories
+      become: true
+      file:
+        path: '{{ item }}'
+        state: directory
+      with_items: '{{ certsDirectories }}'
 
     # --------
 

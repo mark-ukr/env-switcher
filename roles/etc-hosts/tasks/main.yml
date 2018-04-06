@@ -1,4 +1,5 @@
 - name: '{{ (targetEnvironment == currentEnv) | ternary("Add", "Remove") }} Hosts Records'
+  become: true
   lineinfile:
     path: '{{ hostsFile }}'
     state: '{{ (targetEnvironment == currentEnv) | ternary("present", "absent") }}'

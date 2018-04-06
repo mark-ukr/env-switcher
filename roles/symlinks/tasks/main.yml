@@ -1,5 +1,6 @@
 
 - name: '{{ (targetEnvironment == currentEnv) | ternary("Create", "Remove") }} Symlink'
+  become: true
   file:
     path: '{{ symlinkItem.to }}'
     src: '{{ symlinkItem.from }}'

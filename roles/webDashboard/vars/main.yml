@@ -15,6 +15,10 @@ envConfigs:
         to: '{{ nginxSites }}/fib-accounts.bizzabo.com'
       - from: '{{ projectRoots.webDashboard}}'
         to: '{{ nginxWWWLocal }}/fib/dashboard'
+      - from: '{{ projectRoots.webDashboard}}/kickstarter/selfsigned_ssl/selfsigned.key'
+        to: '{{ nginxCerts }}/fib/star.bizzabo.com.key'
+      - from: '{{ projectRoots.webDashboard}}/kickstarter/selfsigned_ssl/selfsigned.crt'
+        to: '{{ nginxCerts }}/fib/star.bizzabo.com.chain.crt'
   tes:
     hosts:
       - tes-accounts.bizzabo.com
