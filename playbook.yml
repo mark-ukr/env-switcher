@@ -6,7 +6,10 @@
     home: '{{ ansible_env.HOME }}'
     gitRepos: '{{ home }}/git-repos'
     nginxCerts: '/etc/nginx/certs'
-    nginxSites: '/etc/nginx/sites-enabled'
+    nginxSitesLinux: '/etc/nginx/sites-enabled'
+    nginxSitesMac: '/usr/local/etc/nginx/sites-enabled'
+    nginxSites: '{{ nginxSitesMac }}'
+    # nginxSites: '{{ nginxSitesLinux }}'
     nginxWWW: '/usr/share/nginx/www'
     nginxWWWLocal: '/usr/local/share/nginx/www'
     hostsFile: /etc/hosts
@@ -37,8 +40,6 @@
       - '{{ nginxCerts }}/qa'
       - '{{ nginxCerts }}/prod'
     wwwDirectories:
-      - '{{ nginxWWW }}/qa'
-      - '{{ nginxWWW }}/prod'
       - '{{ nginxWWWLocal }}/hop'
       - '{{ nginxWWWLocal }}/fib'
       - '{{ nginxWWWLocal }}/tes'
