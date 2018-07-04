@@ -37,13 +37,6 @@
       - '{{ nginxCerts }}/qa'
       - '{{ nginxCerts }}/prod'
     wwwDirectories:
-      - '{{ nginxWWW }}/hop'
-      - '{{ nginxWWW }}/fib'
-      - '{{ nginxWWW }}/tes'
-      - '{{ nginxWWW }}/tur'
-      - '{{ nginxWWW }}/dev'
-      - '{{ nginxWWW }}/gang'
-      - '{{ nginxWWW }}/demo'
       - '{{ nginxWWW }}/qa'
       - '{{ nginxWWW }}/prod'
       - '{{ nginxWWWLocal }}/hop'
@@ -53,8 +46,6 @@
       - '{{ nginxWWWLocal }}/dev'
       - '{{ nginxWWWLocal }}/gang'
       - '{{ nginxWWWLocal }}/demo'
-      - '{{ nginxWWWLocal }}/qa'
-      - '{{ nginxWWWLocal }}/prod'
 
   tasks:
     - name: Create WWW Directories
